@@ -1,0 +1,321 @@
+/* ============================================
+   1. RESET & BASE
+   Reset removes browser default spacing so we
+   control everything ourselves. box-sizing:
+   border-box means padding/border don't add
+   extra size to elements (much less confusing).
+   ============================================ */
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   2. DESIGN TOKENS (CSS variables)
+   Defining colors/fonts once here means we can
+   reuse them everywhere with var(--name), and
+   change the whole site's look by editing one line.
+   ============================================ */
+:root {
+  --paper: #f6f4ee;       /* background */
+  --ink: #16231c;         /* main text, deep green-black */
+  --ink-soft: #4b5b52;    /* secondary text */
+  --teal: #1f7a6c;        /* primary accent - DNA green */
+  --amber: #c98a2c;       /* secondary accent - agar amber */
+  --line: #dbd6c6;        /* hairline borders */
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================
+   3. NAVIGATION
+   Flexbox (display:flex) lines items up in a row
+   and space-between pushes them to opposite ends.
+   ============================================ */
+.site-nav {
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 10;
+}
+
+.site-nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-mark {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--teal);
+  font-size: 0.95rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--teal);
+}
+
+/* ============================================
+   4. HERO SECTION
+   ============================================ */
+.hero {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 96px 24px 64px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--teal);
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.hero-eyebrow .seq {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--teal);
+  border-bottom: 3px solid var(--amber);
+}
+
+.lede {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin-bottom: 32px;
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pill {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.pill:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+/* ============================================
+   5. RULERS (section dividers)
+   ============================================ */
+.ruler {
+  height: 1px;
+  background: var(--line);
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   6. CONTENT BLOCKS
+   ============================================ */
+.block {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.block-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--amber);
+}
+
+.block-head h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.prose p {
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  max-width: 65ch;
+}
+
+.prose strong {
+  color: var(--ink);
+}
+
+/* ============================================
+   7. TIMELINE (CV section)
+   ============================================ */
+.timeline-item {
+  border-left: 2px solid var(--line);
+  padding-left: 20px;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--amber);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.timeline-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.timeline-item p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   8. BLOG POST LIST
+   ============================================ */
+.post-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  transition: opacity 0.2s;
+}
+
+.post-row:hover {
+  opacity: 0.7;
+}
+
+.post-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.post-excerpt {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.post-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.back-link {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--teal);
+}
+
+/* ============================================
+   9. FOOTER
+   ============================================ */
+footer {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+footer a {
+  color: var(--teal);
+}
+
+/* ============================================
+   10. RESPONSIVE (mobile)
+   Media query: rules inside only apply when the
+   screen is 640px wide or less (phones).
+   ============================================ */
+@media (max-width: 640px) {
+  .nav-links {
+    gap: 16px;
+  }
+  .hero {
+    padding: 64px 20px 48px;
+  }
+  footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
