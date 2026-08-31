@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="400" viewBox="0 0 200 400">
+  <path d="M40,0 C40,50 160,50 160,100 C160,150 40,150 40,200 C40,250 160,250 160,300 C160,350 40,350 40,400" fill="none" stroke="#1f7a6c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M160,0 C160,50 40,50 40,100 C40,150 160,150 160,200 C160,250 40,250 40,300 C40,350 160,350 160,400" fill="none" stroke="#c98a2c" stroke-width="4" stroke-linecap="round"/>
+  <line x1="40" y1="50" x2="160" y2="50" stroke="#cfd6cf" stroke-width="2"/>
+  <line x1="40" y1="150" x2="160" y2="150" stroke="#cfd6cf" stroke-width="2"/>
+  <line x1="40" y1="250" x2="160" y2="250" stroke="#cfd6cf" stroke-width="2"/>
+  <line x1="40" y1="350" x2="160" y2="350" stroke="#cfd6cf" stroke-width="2"/>
+  <circle cx="40" cy="50" r="5" fill="#1f7a6c"/>
+  <circle cx="160" cy="50" r="5" fill="#c98a2c"/>
+  <circle cx="40" cy="150" r="5" fill="#1f7a6c"/>
+  <circle cx="160" cy="150" r="5" fill="#c98a2c"/>
+  <circle cx="40" cy="250" r="5" fill="#1f7a6c"/>
+  <circle cx="160" cy="250" r="5" fill="#c98a2c"/>
+  <circle cx="40" cy="350" r="5" fill="#1f7a6c"/>
+  <circle cx="160" cy="350" r="5" fill="#c98a2c"/>
+</svg>

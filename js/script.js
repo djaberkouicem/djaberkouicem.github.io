@@ -1,5 +1,40 @@
 // ============================================
-// REVEAL ON SCROLL
+// SLIDE-OUT DRAWER MENU
+// Goal: hamburger button opens a side panel;
+// clicking the backdrop, the close button, or
+// pressing Escape closes it again.
+// ============================================
+
+const menuToggle = document.querySelector('.menu-toggle');
+const drawer = document.querySelector('.drawer');
+const drawerOverlay = document.querySelector('.drawer-overlay');
+const drawerClose = document.querySelector('.drawer-close');
+
+function openDrawer() {
+  drawer.classList.add('open');
+  drawerOverlay.classList.add('open');
+}
+
+function closeDrawer() {
+  drawer.classList.remove('open');
+  drawerOverlay.classList.remove('open');
+}
+
+// Guard with "if" in case a page is missing one
+// of these elements — prevents a crash that would
+// stop the rest of the script from running.
+if (menuToggle && drawer && drawerOverlay) {
+  menuToggle.addEventListener('click', openDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+  if (drawerClose) {
+    drawerClose.addEventListener('click', closeDrawer);
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDrawer();
+  });
+}
+
+
 // Goal: sections with class "reveal" fade in
 // smoothly the moment they enter the screen.
 // ============================================
