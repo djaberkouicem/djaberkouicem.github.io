@@ -25,6 +25,7 @@
   --amber: #c98a2c;       /* secondary accent - agar amber */
   --line: #dbd6c6;        /* hairline borders */
   --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
 }
@@ -93,7 +94,8 @@ a {
 }
 
 /* ============================================
-   4. HERO SECTION
+   4. LEGACY HERO (still used by old markup if
+   any page references it — harmless to keep)
    ============================================ */
 .hero {
   max-width: 780px;
@@ -158,7 +160,7 @@ a {
 /* ============================================
    4B. HAMBURGER MENU + SLIDE-OUT DRAWER
    Three horizontal lines (the "hamburger" icon)
-   toggle a panel that slides in from the right.
+   toggle a panel that slides in from the left.
    ============================================ */
 .menu-toggle {
   width: 40px;
@@ -185,8 +187,6 @@ a {
   background: var(--teal);
 }
 
-/* The dark backdrop behind the drawer. Clicking
-   it closes the menu (handled in script.js). */
 .drawer-overlay {
   position: fixed;
   inset: 0;
@@ -202,9 +202,6 @@ a {
   pointer-events: auto;
 }
 
-/* The panel itself. translateX(100%) hides it
-   just off-screen to the right; .open slides it
-   into view. */
 .drawer {
   position: fixed;
   top: 0;
@@ -258,39 +255,93 @@ a {
 }
 
 /* ============================================
-   4C. MINIMAL HOMEPAGE HERO
-   Name, role, one-line bio — nothing else.
-   min-height + flex centers it vertically so it
-   feels like a proper landing screen.
+   4C. NEW HOMEPAGE HERO
+   Two-column layout: text on the left, a static
+   DNA illustration on the right. Matches the
+   reference design (serif name, tags line, CTA).
    ============================================ */
 .hero-minimal {
-  max-width: 780px;
+  position: relative;
+  overflow: hidden;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 24px;
-  min-height: 78vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 64px 24px;
+  min-height: 82vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 32px;
 }
 
-.hero-minimal h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 600;
-  margin-bottom: 14px;
+.hero-text {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-name {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 18px;
 }
 
 .hero-role {
   font-family: var(--font-mono);
+  letter-spacing: 0.08em;
   color: var(--teal);
   font-size: 1rem;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.hero-tags {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
   margin-bottom: 22px;
 }
 
 .hero-bio {
   color: var(--ink-soft);
-  font-size: 1.15rem;
-  max-width: 56ch;
+  font-size: 1.1rem;
+  max-width: 46ch;
+  margin-bottom: 32px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  padding: 14px 26px;
+  border-radius: 2px;
+  color: var(--ink);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hero-cta:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.hero-dna {
+  position: relative;
+  height: 100%;
+  min-height: 520px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.hero-dna img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.9;
 }
 
 /* ============================================
@@ -309,6 +360,7 @@ a {
   font-size: clamp(2rem, 5vw, 2.8rem);
   font-weight: 600;
 }
+
 /* ============================================
    5. RULERS (section dividers)
    ============================================ */
@@ -328,11 +380,6 @@ a {
   padding: 64px 24px;
 }
 
-/* Reveal-on-scroll: by default .reveal elements
-   are fully visible (safe if JS never runs).
-   JavaScript adds .pre-reveal to hide them just
-   before observing, then swaps to .in-view when
-   the element scrolls into sight. */
 .reveal {
   transition: opacity 1.1s ease, transform 1.1s ease;
 }
@@ -492,30 +539,29 @@ footer a {
     gap: 8px;
   }
 }
-.hero-minimal {
-  position: relative;
-  overflow: hidden;
+
+/* ============================================
+   11. NEW HERO RESPONSIVE
+   Stacks the two columns on smaller screens and
+   shrinks/fades the DNA so text stays readable.
+   ============================================ */
+@media (max-width: 900px) {
+  .hero-minimal {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 56px 24px 40px;
+  }
+
+  .hero-dna {
+    order: -1;
+    min-height: 260px;
+    opacity: 0.5;
+  }
 }
 
-.hero-minimal::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('../img/dna-tile.svg');
-  background-repeat: repeat;
-  background-size: 200px 400px;
-  opacity: 0.14;
-  animation: dnaFlow 25s linear infinite;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-minimal > * {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes dnaFlow {
-  from { background-position: 0 0; }
-  to { background-position: 0 -400px; }
+@media (max-width: 480px) {
+  .hero-dna {
+    min-height: 180px;
+    opacity: 0.35;
+  }
 }
