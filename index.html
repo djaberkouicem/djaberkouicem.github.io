@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Djaber Kouicem — Genetics</title>
+<title>Djaber Kouicem — Genetics Researcher</title>
 <meta name="description" content="Djaber Kouicem, genetics student at Université Constantine 1 — Khenchela.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,44 +11,87 @@
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="wrap">
-    <a href="index.html" class="nav-mark">DK / genetics</a>
-    <button class="menu-toggle" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="drawer-overlay"></div>
-<aside class="drawer">
-  <button class="drawer-close" aria-label="Close menu">×</button>
-  <ul class="drawer-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="cv.html">CV</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="mailto:kouicemdjaber0@gmail.com">Contact</a></li>
-  </ul>
-</aside>
-
-<header class="hero-minimal">
-  <div class="hero-text">
-    <p class="hero-eyebrow">ATG · START <span class="seq">— everything below is coding sequence</span></p>
-    <h1 class="hero-name">Djaber Kouicem</h1>
-    <p class="hero-role">M2 Genetics Student</p>
-    <p class="hero-tags">Molecular Genetics&nbsp;&nbsp;·&nbsp;&nbsp;Genomics&nbsp;&nbsp;·&nbsp;&nbsp;Bioinformatics</p>
-    <p class="hero-bio">
-      Exploring genetics through molecular biology, genomics, and
-      computational approaches.
-    </p>
-    <a href="cv.html" class="hero-cta">View my work <span aria-hidden="true">→</span></a>
-  </div>
-  <div class="hero-dna" aria-hidden="true">
-    <img src="img/dna-hero.svg" alt="">
+<header class="site-header">
+  <div class="header-wrap">
+    <a href="index.html" class="brand">
+      <img src="img/dna-mark.svg" alt="" class="brand-icon">
+      <span class="brand-text">
+        <span class="brand-name">DJABER KOUICEM</span>
+        <span class="brand-sub">GENETICS RESEARCHER</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="mailto:kouicemdjaber0@gmail.com">Contact</a>
+    </nav>
+    <a href="cv.pdf" class="btn-download" download>⬇ Download CV</a>
   </div>
 </header>
+
+<section class="hero-blue">
+  <div class="hero-text">
+    <span class="hero-badge">Genetics &amp; Molecular Biology</span>
+    <h1 class="hero-name">Djaber Kouicem</h1>
+    <p class="hero-subtitle">Genetics <span class="accent">Researcher</span> &amp; Bioinformatician</p>
+    <p class="hero-desc">
+      M2 student in Genetics at Université Constantine 1. Passionate about
+      understanding life at the molecular level and applying bioinformatics
+      to solve real biological questions.
+    </p>
+    <div class="hero-actions">
+      <a href="about.html" class="btn-primary">👤 About Me</a>
+      <a href="projects.html" class="btn-secondary">📁 View Projects</a>
+    </div>
+  </div>
+  <div class="hero-dna-blue" aria-hidden="true">
+    <img src="img/dna-hero-blue.svg" alt="">
+  </div>
+</section>
+
+<div class="feature-strip">
+  <div class="feature-item">
+    <span class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c0 6 10 6 10 12 0 3-2 6-5 6M17 21c0-6-10-6-10-12 0-3 2-6 5-6"/></svg>
+    </span>
+    <div>
+      <h4>Genetics</h4>
+      <p>Exploring heredity and genetic variation</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <span class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 21h6M12 15v6"/></svg>
+    </span>
+    <div>
+      <h4>Research</h4>
+      <p>Conducting scientific investigations</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <span class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-6"/></svg>
+    </span>
+    <div>
+      <h4>Bioinformatics</h4>
+      <p>Analyzing biological data with computational tools</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <span class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V6a2 2 0 0 1 2-2h9v15H6a2 2 0 0 0-2 2Z"/><path d="M15 4h3a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2h-3"/></svg>
+    </span>
+    <div>
+      <h4>Continuous Learning</h4>
+      <p>Always learning, always growing</p>
+    </div>
+  </div>
+</div>
+
+<div class="hero-spacer"></div>
 
 <footer>
   <span>© 2026 Djaber Kouicem</span>
