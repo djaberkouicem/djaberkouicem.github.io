@@ -1,88 +1,69 @@
+
 // ============================================
-// SLIDE-OUT DRAWER MENU
-// Goal: hamburger button opens a side panel;
-// clicking the backdrop, the close button, or
-// pressing Escape closes it again.
+// RESOURCES: SUBJECT LIST (on resources.html)
+// Reads the RESOURCES array (from resources-data.js)
+// and builds the list of subject links automatically.
 // ============================================
+const subjectsListEl = document.querySelector('#subjects-list');
 
-const menuToggle = document.querySelector('.menu-toggle');
-const drawer = document.querySelector('.drawer');
-const drawerOverlay = document.querySelector('.drawer-overlay');
-const drawerClose = document.querySelector('.drawer-close');
+if (subjectsListEl && typeof RESOURCES !== 'undefined') {
+  RESOURCES.forEach(function (subject) {
+    const link = document.createElement('a');
+    link.className = 'post-row';
+    link.href = 'subjects/subject.html?slug=' + subject.slug;
 
-function openDrawer() {
-  drawer.classList.add('open');
-  drawerOverlay.classList.add('open');
-}
+    const count = subject.chapters.length;
+    const countLabel = count === 1 ? '1 chapter' : count + ' chapters';
 
-function closeDrawer() {
-  drawer.classList.remove('open');
-  drawerOverlay.classList.remove('open');
-}
+    link.innerHTML =
+      '<div>' +
+        '<div class="post-title">' + subject.title + '</div>' +
+        '<p class="post-excerpt">' + subject.description + '</p>' +
+      '</div>' +
+      '<span class="post-meta">' + countLabel + '</span>';
 
-// Guard with "if" in case a page is missing one
-// of these elements — prevents a crash that would
-// stop the rest of the script from running.
-if (menuToggle && drawer && drawerOverlay) {
-  menuToggle.addEventListener('click', openDrawer);
-  drawerOverlay.addEventListener('click', closeDrawer);
-  if (drawerClose) {
-    drawerClose.addEventListener('click', closeDrawer);
-  }
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeDrawer();
+    subjectsListEl.appendChild(link);
   });
 }
 
-
-// Goal: sections with class "reveal" fade in
-// smoothly the moment they enter the screen.
 // ============================================
+// RESOURCES: SUBJECT PAGE (on subjects/subject.html)
+// Reads ?slug=xxx from the URL, finds that subject in
+// RESOURCES, and renders its title + chapter list.
+// ============================================
+const chaptersListEl = document.querySelector('#chapters-list');
 
-// 1. Select every element that has the "reveal" class.
-//    document.querySelectorAll returns a list of ALL
-//    matches (not just the first one).
-const revealItems = document.querySelectorAll('.reveal');
+if (chaptersListEl && typeof RESOURCES !== 'undefined') {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
+  const subject = RESOURCES.find(function (s) { return s.slug === slug; });
 
-// 2. Hide them first, right now, using JavaScript
-//    (not CSS) — this is "progressive enhancement":
-//    if this script ever fails to run, the elements
-//    were never hidden in the first place, so content
-//    stays visible and readable no matter what.
-revealItems.forEach(function (item) {
-  item.classList.add('pre-reveal');
-});
+  const titleEl = document.querySelector('#subject-title');
+  const pageTitleTag = document.querySelector('title');
 
-// 3. Create an "observer" — a built-in browser tool
-//    that watches elements and tells us when they
-//    enter or leave the visible screen (the "viewport").
-const observer = new IntersectionObserver(
-  function (entries) {
-    // "entries" is the list of elements the observer
-    // is reporting on right now.
-    entries.forEach(function (entry) {
-      // entry.isIntersecting is true when the element
-      // has scrolled into view.
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('pre-reveal');
-        entry.target.classList.add('in-view');
+  if (subject) {
+    if (titleEl) titleEl.textContent = subject.title;
+    if (pageTitleTag) pageTitleTag.textContent = subject.title + ' — Djaber Kouicem';
 
-        // Stop watching this element — we only want
-        // the animation to happen once, not every
-        // time the user scrolls past it.
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    // threshold: 0.15 means "trigger once 15% of the
-    // element is visible" — feels natural, not too early.
-    threshold: 0.15,
+    if (subject.chapters.length === 0) {
+      chaptersListEl.innerHTML = '<p style="color:var(--ink-soft);">No summaries uploaded yet for this subject — check back soon.</p>';
+    } else {
+      subject.chapters.forEach(function (chapter) {
+        const link = document.createElement('a');
+        link.className = 'post-row';
+        link.href = '../' + chapter.file;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.innerHTML =
+          '<div>' +
+            '<div class="post-title">' + chapter.title + '</div>' +
+            '<p class="post-excerpt">' + chapter.description + '</p>' +
+          '</div>' +
+          '<span class="post-meta">PDF</span>';
+        chaptersListEl.appendChild(link);
+      });
+    }
+  } else if (titleEl) {
+    titleEl.textContent = 'Subject not found';
   }
-);
-
-// 4. Tell the observer to start watching each
-//    .reveal element.
-revealItems.forEach(function (item) {
-  observer.observe(item);
-});
+}

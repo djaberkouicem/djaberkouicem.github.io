@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Djaber Kouicem</title>
-<meta name="description" content="About Djaber Kouicem, genetics student at Université Constantine 1.">
+<title>Resources — Djaber Kouicem</title>
+<meta name="description" content="Course summaries and study notes by Djaber Kouicem, Master's student in Genetics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -22,9 +22,9 @@
     </a>
     <nav class="main-nav">
       <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
+      <a href="about.html">About</a>
       <a href="research.html">Research</a>
-      <a href="resources.html">Resources</a>
+      <a href="resources.html" class="active">Resources</a>
       <a href="projects.html">Projects</a>
       <a href="blog.html">Blog</a>
       <a href="mailto:kouicemdjaber0@gmail.com">Contact</a>
@@ -34,23 +34,21 @@
 </header>
 
 <header class="page-hero">
-  <h1>About</h1>
+  <h1>Resources</h1>
 </header>
 
 <section class="block reveal">
   <div class="prose">
-    <p>
-      I'm <strong>Djaber Kouicem</strong>, a Master's student of
-      <strong>genetics</strong> at the <strong>University of Constantine 1</strong>.
-      I'm interested in how heredity, molecular biology, and data intersect —
-      from the mechanics of inheritance to the tools we use to read and
-      interpret genomes.
-    </p>
-    <p>
-      This site is a simple, evolving space to share my academic background
-      and write short notes as I learn. Feel free to reach out if you'd like
-      to talk research, coursework, or collaboration.
-    </p>
+    <p>Course summaries and study notes from my Master's coursework. Pick a subject to see the available chapters.</p>
+  </div>
+
+  <div class="block-head">
+    <span class="num">S1</span>
+    <h2>Master 1 — Semester 1</h2>
+  </div>
+
+  <div class="post-list" id="subjects-list">
+    <!-- Filled in automatically by script.js from js/resources-data.js -->
   </div>
 </section>
 
@@ -59,6 +57,7 @@
   <a href="mailto:kouicemdjaber0@gmail.com">kouicemdjaber0@gmail.com</a>
 </footer>
 
+<script src="js/resources-data.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
