@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRCA1 &amp; Breast Cancer — Djaber Kouicem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-wrap">
+    <a href="../index.html" class="brand">
+      <img src="../img/dna-mark.svg" alt="" class="brand-icon">
+      <span class="brand-text">
+        <span class="brand-name">DJABER KOUICEM</span>
+        <span class="brand-sub">GENETICS RESEARCHER</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../research.html">Research</a>
+      <a href="../resources.html">Resources</a>
+      <a href="../projects.html" class="active">Projects</a>
+      <a href="../blog.html">Blog</a>
+      <a href="mailto:kouicemdjaber0@gmail.com">Contact</a>
+    </nav>
+    <a href="../cv.pdf" class="btn-download" download>⬇ Download CV</a>
+  </div>
+</header>
+
+<header class="page-hero">
+  <h1>BRCA1 &amp; Breast Cancer</h1>
+</header>
+
+<section class="block reveal">
+  <p class="back-link" style="display:block;margin-bottom:24px;"><a href="../projects.html">← Back to Projects</a></p>
+
+  <div class="prose">
+    <p>
+      <strong>BRCA1</strong> is a tumor suppressor gene strongly linked to hereditary
+      breast and ovarian cancer. This project focuses on its RING domain, a
+      small region (residues 1–100) responsible for the protein's enzymatic
+      activity and its interaction with BARD1.
+    </p>
+    <p>
+      Using the reference protein sequence from UniProt (P38398), I compared
+      the wild-type sequence with a known pathogenic variant, <strong>C61G</strong>,
+      where cysteine at position 61 is replaced by glycine. A short script in
+      R was used to align both sequences character by character and confirm
+      the exact mutation site.
+    </p>
+  </div>
+
+  <figure class="project-figure">
+    <img src="../img/brca1-overview.png" alt="Overview of the BRCA1 RING domain crystal structure (PDB 1JM7)">
+    <figcaption>Overview of the BRCA1 RING domain structure (PDB: 1JM7), rendered in PyMOL. Grey spheres are structural zinc ions.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>
+      To visualize the structural context, I loaded the RING domain crystal
+      structure (PDB: 1JM7) in PyMOL and highlighted residue 61 within the
+      BRCA1 chain. Cysteine 61 is one of several residues that coordinate a
+      structural zinc ion — replacing it with glycine likely disrupts this
+      coordination, destabilizing the domain's fold and impairing its normal
+      function.
+    </p>
+  </div>
+
+  <figure class="project-figure">
+    <img src="../img/brca1-mutation.png" alt="Close-up of residue 61 highlighted in red, labeled C61G, next to a coordinated zinc ion">
+    <figcaption>Close-up of residue 61 (highlighted in red, labeled C61G) next to its coordinated zinc ion.</figcaption>
+  </figure>
+
+  <div class="tool-tags">
+    <span>UniProt</span>
+    <span>R</span>
+    <span>PyMOL</span>
+    <span>RCSB PDB</span>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Djaber Kouicem</span>
+  <a href="mailto:kouicemdjaber0@gmail.com">kouicemdjaber0@gmail.com</a>
+</footer>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

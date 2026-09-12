@@ -892,3 +892,86 @@ footer a {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   15. PROJECT CARDS (portal-style grid)
+   Rectangular cards: image on top, bold
+   underlined title below. Click opens the full
+   project page.
+   ============================================ */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.project-card {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(18, 33, 60, 0.1);
+}
+
+.project-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  background: #f0f0f0;
+}
+
+.project-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: center;
+  padding: 16px 12px;
+  border-top: 3px solid var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ============================================
+   16. PROJECT DETAIL PAGE
+   ============================================ */
+.project-figure {
+  margin: 24px 0;
+}
+
+.project-figure img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+
+.project-figure figcaption {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.tool-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tool-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+}
