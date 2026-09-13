@@ -37,50 +37,208 @@
 </header>
 
 <section class="block reveal">
-  <p class="back-link" style="display:block;margin-bottom:24px;"><a href="../projects.html">← Back to Projects</a></p>
+  <p class="back-link" style="display:block;margin-bottom:8px;"><a href="../projects.html">← Back to Projects</a></p>
+
+  <dl class="project-meta">
+    <div>
+      <dt>Project Type</dt>
+      <dd>Computational Genetics / Structural Bioinformatics</dd>
+    </div>
+    <div>
+      <dt>Focus</dt>
+      <dd>BRCA1 · RING Domain · C61G · Breast Cancer</dd>
+    </div>
+    <div>
+      <dt>Tools</dt>
+      <dd>R · UniProt · RCSB PDB · PyMOL</dd>
+    </div>
+  </dl>
+
+  <div class="research-question">
+    <strong>Research Question</strong>
+    How can disease-associated BRCA1 RING-domain variants be characterized using
+    sequence information and structural visualization? More specifically —
+    where does C61G occur within the BRCA1 RING-domain structure, and what
+    structural consequences might this substitution have?
+  </div>
 
   <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Why BRCA1?</h2>
     <p>
-      <strong>BRCA1</strong> is a tumor suppressor gene strongly linked to hereditary
-      breast and ovarian cancer. This project focuses on its RING domain, a
-      small region (residues 1–100) responsible for the protein's enzymatic
-      activity and its interaction with BARD1.
+      <strong>BRCA1</strong> is a tumor suppressor gene strongly linked to
+      hereditary breast and ovarian cancer. Its protein product participates
+      in DNA damage repair and cell-cycle regulation, and pathogenic variants
+      significantly increase lifetime cancer risk.
     </p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Why the RING Domain?</h2>
     <p>
-      Using the reference protein sequence from UniProt (P38398), I compared
-      the wild-type sequence with a known pathogenic variant, <strong>C61G</strong>,
-      where cysteine at position 61 is replaced by glycine. A short script in
-      R was used to align both sequences character by character and confirm
-      the exact mutation site.
+      The N-terminal region of BRCA1 (approximately residues 1–100) forms a
+      <strong>RING domain</strong> that heterodimerizes with BARD1 and
+      contributes to the E3 ubiquitin ligase activity of the BRCA1–BARD1
+      complex. This region is not defined by a single exact boundary in the
+      literature; it is best understood through its structural elements —
+      including two zinc-binding sites formed by residues such as C24, C27,
+      C39, H41, C44, C47, C61, and C64 — rather than as a fixed 1–100 cutoff.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Methods</h2>
+    <p>The workflow followed these steps:</p>
+    <ol style="color:var(--ink-soft);padding-left:20px;">
+      <li>Protein sequence obtained from UniProt (P38398).</li>
+      <li>Variant information cross-checked against published functional and clinical literature.</li>
+      <li>Wild-type and variant amino-acid sequences compared programmatically in R.</li>
+      <li>Variant positions examined within the BRCA1 RING-domain structural context.</li>
+      <li>Structural information obtained from RCSB PDB entry 1JM7.</li>
+      <li>The structure was visualized and inspected using PyMOL.</li>
+      <li>Variants were interpreted within their structural context.</li>
+    </ol>
+    <p style="font-size:0.88rem;color:var(--ink-soft);">
+      (The complete R scripts and raw/intermediate files are kept private;
+      this page summarizes methodology and results rather than publishing
+      the full implementation.)
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Main Case Study: C61G</h2>
+    <p>
+      The sequence comparison in R was used to identify the exact amino-acid
+      difference between the reference and variant sequences, verify the
+      mutation position, and establish the correspondence between wild-type
+      and variant residues:
     </p>
   </div>
 
-  <figure class="project-figure">
-    <img src="../img/brca1-overview.png" alt="Overview of the BRCA1 RING domain crystal structure (PDB 1JM7)">
-    <figcaption>Overview of the BRCA1 RING domain structure (PDB: 1JM7), rendered in PyMOL. Grey spheres are structural zinc ions.</figcaption>
-  </figure>
+  <pre style="background:#f6f4ee;border:1px solid var(--line);border-radius:8px;padding:14px 18px;font-family:var(--font-mono);font-size:0.82rem;overflow-x:auto;">ref_letters[61]   # "C"
+mut_letters[61]   # "G"</pre>
 
   <div class="prose">
+    <p>This confirmed a cysteine-to-glycine substitution at position 61 (C61G).</p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Comparative RING-Domain Variants</h2>
     <p>
-      To visualize the structural context, I loaded the RING domain crystal
-      structure (PDB: 1JM7) in PyMOL and highlighted residue 61 within the
-      BRCA1 chain. Cysteine 61 is one of several residues that coordinate a
-      structural zinc ion — replacing it with glycine likely disrupts this
-      coordination, destabilizing the domain's fold and impairing its normal
-      function.
+      To place C61G in context, it is compared below with two other documented
+      RING-domain substitutions affecting the same zinc-coordinating residue
+      set:
     </p>
   </div>
 
+  <table class="variant-table">
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th>AA Change</th>
+        <th>Position</th>
+        <th>Evidence / Annotation</th>
+        <th>Structural Context</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>C61G</td>
+        <td>Cys → Gly</td>
+        <td>61</td>
+        <td>Cancer-predisposing; abolished E3 ubiquitin ligase activity in vitro (Brzovic et al., 2001, PNAS)</td>
+        <td>Zinc-coordinating residue, RING domain</td>
+      </tr>
+      <tr>
+        <td>C64Y</td>
+        <td>Cys → Tyr</td>
+        <td>64</td>
+        <td>Cancer-predisposing; abolished E3 ubiquitin ligase activity in vitro (Brzovic et al., 2001, PNAS)</td>
+        <td>Zinc-coordinating residue, RING domain</td>
+      </tr>
+      <tr>
+        <td>C64G</td>
+        <td>Cys → Gly</td>
+        <td>64</td>
+        <td>Reported to disrupt RING-domain structural integrity (literature review, secondary source)</td>
+        <td>Zinc-coordinating residue, RING domain</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:-8px;">
+    This table compiles findings reported in the cited literature; it is not
+    a clinical classification and was not generated by independent
+    experimental testing in this project.
+  </p>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Structural Visualization</h2>
+  </div>
+
   <figure class="project-figure">
-    <img src="../img/brca1-mutation.png" alt="Close-up of residue 61 highlighted in red, labeled C61G, next to a coordinated zinc ion">
-    <figcaption>Close-up of residue 61 (highlighted in red, labeled C61G) next to its coordinated zinc ion.</figcaption>
+    <img src="../img/brca1-overview.png" alt="Solution NMR structure of the BRCA1/BARD1 RING-domain heterodimer">
+    <figcaption>Structural context of the BRCA1/BARD1 RING-domain heterodimer. PDB 1JM7, solution structure determined by NMR. Grey spheres represent structural zinc ions.</figcaption>
   </figure>
+
+  <figure class="project-figure">
+    <img src="../img/brca1-mutation.png" alt="Close-up of BRCA1 residue 61 and a coordinated zinc ion">
+    <figcaption>Close-up of the Cys61 region and its coordinated zinc ion. The visualization highlights the structural context in which the C61G substitution occurs.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Results</h2>
+    <ul style="color:var(--ink-soft);padding-left:20px;">
+      <li>C61G corresponds to a cysteine-to-glycine substitution at residue 61 of BRCA1.</li>
+      <li>Residue 61 lies within the RING-domain structural context and participates in a zinc-coordinating environment, as shown in PDB 1JM7.</li>
+      <li>Two additional documented substitutions at nearby zinc-coordinating residues (C64Y, C64G) were identified from the literature for comparison.</li>
+      <li>Structural visualization provides a way to generate hypotheses about the potential effects of these substitutions, based on their location relative to the zinc-binding sites.</li>
+    </ul>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Interpretation</h2>
+  </div>
+
+  <div class="evidence-block">
+    <span class="evidence-tag observed">Observed</span>
+    <p>Position 61 is located within the RING-domain structural context, and Cys61 participates in the zinc-coordinating environment shown in the PDB 1JM7 model.</p>
+  </div>
+  <div class="evidence-block">
+    <span class="evidence-tag hypothesis">Interpretation / Hypothesis</span>
+    <p>Because Cys61 contributes to this zinc-coordinating environment, replacing cysteine with glycine is expected to alter the local structural environment. The structural visualization provides a mechanistic hypothesis for how C61G may affect RING-domain integrity.</p>
+  </div>
+  <div class="evidence-block">
+    <span class="evidence-tag not-proven">Not directly established by this project</span>
+    <p>The exact functional consequences of C61G (e.g., degree of loss of ubiquitin ligase activity) are not measured here; that evidence comes from external functional studies (cited above), not from this visualization alone.</p>
+  </div>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Limitations</h2>
+  </div>
+
+  <ul class="limitations-list">
+    <li>The structural model provides spatial context but does not experimentally measure the functional effect of C61G.</li>
+    <li>A substitution shown in a structural model does not by itself demonstrate loss of activity.</li>
+    <li>PDB 1JM7 is an NMR solution structure and represents a structural model rather than a direct experimental measurement of the C61G variant specifically.</li>
+    <li>Additional computational or experimental approaches would be required to quantify the effect of individual variants.</li>
+  </ul>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Conclusion</h2>
+    <p>
+      This project demonstrates how sequence analysis and structural
+      visualization can be combined to investigate disease-associated BRCA1
+      variants. C61G provides a useful case study because the substitution
+      occurs within the zinc-coordinating RING-domain environment. The
+      analysis supports a structural hypothesis for how the substitution may
+      alter the local environment, while recognizing that functional
+      consequences require additional evidence beyond structural
+      visualization alone.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Data Sources</h2>
+  </div>
+
+  <ul class="sources-list">
+    <li><a href="https://www.uniprot.org/uniprotkb/P38398" target="_blank" rel="noopener">UniProt — BRCA1, P38398</a></li>
+    <li><a href="https://www.rcsb.org/structure/1JM7" target="_blank" rel="noopener">RCSB Protein Data Bank — PDB 1JM7</a></li>
+    <li>Brzovic et al. (2001), "Cancer-predisposing mutations within the RING domain of BRCA1," PNAS — variant functional evidence for C61G and C64Y.</li>
+  </ul>
 
   <div class="tool-tags">
-    <span>UniProt</span>
+    <span><a href="https://www.uniprot.org" target="_blank" rel="noopener" style="color:inherit;">UniProt</a></span>
     <span>R</span>
+    <span><a href="https://www.rcsb.org" target="_blank" rel="noopener" style="color:inherit;">RCSB PDB</a></span>
     <span>PyMOL</span>
-    <span>RCSB PDB</span>
   </div>
 </section>
 
