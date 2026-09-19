@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coronavirus Phylogenetics — Djaber Kouicem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-wrap">
+    <a href="../index.html" class="brand">
+      <img src="../img/dna-mark.svg" alt="" class="brand-icon">
+      <span class="brand-text">
+        <span class="brand-name">DJABER KOUICEM</span>
+        <span class="brand-sub">GENETICS RESEARCHER</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../research.html">Research</a>
+      <a href="../resources.html">Resources</a>
+      <a href="../projects.html" class="active">Projects</a>
+      <a href="../blog.html">Blog</a>
+      <a href="mailto:kouicemdjaber0@gmail.com">Contact</a>
+    </nav>
+    <a href="../cv.pdf" class="btn-download" download>⬇ Download CV</a>
+  </div>
+</header>
+
+<header class="page-hero">
+  <h1>Coronavirus Phylogenetics</h1>
+</header>
+
+<section class="block reveal">
+  <p class="back-link" style="display:block;margin-bottom:8px;"><a href="../projects.html">← Back to Projects</a></p>
+
+  <dl class="project-meta">
+    <div>
+      <dt>Project Type</dt>
+      <dd>Computational Genetics / Molecular Phylogenetics</dd>
+    </div>
+    <div>
+      <dt>Focus</dt>
+      <dd>Human Coronaviruses · Spike Protein · Evolutionary Relationships</dd>
+    </div>
+    <div>
+      <dt>Tools</dt>
+      <dd>NCBI · Clustal Omega · R (seqinr, ape)</dd>
+    </div>
+  </dl>
+
+  <div class="research-question">
+    <strong>Research Question</strong>
+    How are the major human-infecting coronaviruses related to one another
+    based on their Spike protein sequences, and does a Spike-based tree
+    recover the established genus-level classification of these viruses
+    (Alphacoronavirus vs. Betacoronavirus)?
+  </div>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Why Coronaviruses?</h2>
+    <p>
+      Seven coronaviruses are known to infect humans, ranging from mild
+      seasonal colds (HCoV-229E, HCoV-NL63, HCoV-OC43) to severe epidemic
+      and pandemic disease (SARS-CoV, MERS-CoV, SARS-CoV-2). Comparing their
+      genetic relationships helps explain why some outbreaks were far more
+      severe than others and how these viruses are grouped taxonomically.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Why the Spike Protein?</h2>
+    <p>
+      The <strong>Spike (S) protein</strong> mediates viral entry into host
+      cells and is the main target of neutralizing antibodies and vaccines,
+      which makes it a biologically meaningful and widely studied region for
+      comparison. It is worth noting, however, that Spike evolves relatively
+      quickly and is prone to recombination — a point revisited in the
+      Limitations section below.
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Viruses Compared</h2>
+    <p>Six Spike protein sequences were retrieved from NCBI Protein:</p>
+  </div>
+
+  <table class="variant-table">
+    <thead>
+      <tr>
+        <th>Virus</th>
+        <th>NCBI Accession</th>
+        <th>Established Genus</th>
+        <th>Notable Disease</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>SARS-CoV-2</td><td>YP_009724390</td><td>Betacoronavirus (Sarbecovirus)</td><td>COVID-19</td></tr>
+      <tr><td>SARS-CoV</td><td>AAR07625</td><td>Betacoronavirus (Sarbecovirus)</td><td>SARS (2003)</td></tr>
+      <tr><td>MERS-CoV</td><td>AHX00731</td><td>Betacoronavirus (Merbecovirus)</td><td>MERS</td></tr>
+      <tr><td>HCoV-OC43</td><td>AXX83297</td><td>Betacoronavirus (Embecovirus)</td><td>Common cold</td></tr>
+      <tr><td>HCoV-229E</td><td>ABB90513</td><td>Alphacoronavirus</td><td>Common cold</td></tr>
+      <tr><td>HCoV-NL63</td><td>QED88040</td><td>Alphacoronavirus</td><td>Common cold</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:-8px;">
+    Genus classification per ICTV (International Committee on Taxonomy of
+    Viruses), as reported in the virology literature cited under Data Sources.
+  </p>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Methods</h2>
+    <p>The workflow followed these steps:</p>
+    <ol style="color:var(--ink-soft);padding-left:20px;">
+      <li>Spike protein sequences retrieved from NCBI Protein for the six viruses above.</li>
+      <li>Multiple sequence alignment performed using Clustal Omega (EMBL-EBI).</li>
+      <li>The aligned sequences were imported into R using the <code>seqinr</code> package.</li>
+      <li>Pairwise genetic distances were calculated from the alignment using an identity-based distance matrix.</li>
+      <li>A phylogenetic tree was constructed from the distance matrix using the Neighbor-Joining (NJ) algorithm, implemented in the <code>ape</code> package.</li>
+      <li>The resulting tree was compared against the established ICTV genus classification of these viruses.</li>
+    </ol>
+    <p style="font-size:0.88rem;color:var(--ink-soft);">
+      (Raw sequence files and the full R script are kept private; this page
+      summarizes methodology and results rather than publishing the complete
+      implementation.)
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Results</h2>
+  </div>
+
+  <figure class="project-figure">
+    <img src="../img/coronavirus-tree.png" alt="Neighbor-joining phylogenetic tree of six human coronavirus Spike proteins">
+    <figcaption>Neighbor-joining tree of Spike protein sequences from six human-infecting coronaviruses, built in R from a Clustal Omega alignment.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <ul style="color:var(--ink-soft);padding-left:20px;">
+      <li>SARS-CoV-2 and SARS-CoV showed the smallest pairwise genetic distance among all six viruses (identity-based distance ≈ 0.48), consistent with their known close relationship as members of the Sarbecovirus subgenus.</li>
+      <li>HCoV-NL63 and HCoV-229E — the two Alphacoronaviruses in the set — also grouped together with a comparatively low distance (≈ 0.60), matching their shared genus.</li>
+      <li>HCoV-OC43, despite being a Betacoronavirus (Embecovirus subgenus), clustered with the Alphacoronavirus pair (NL63/229E) rather than with MERS-CoV or the SARS pair in this tree.</li>
+      <li>MERS-CoV formed the most distinct, longest branch in the tree relative to the other viruses tested.</li>
+    </ul>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Interpretation</h2>
+  </div>
+
+  <div class="evidence-block">
+    <span class="evidence-tag observed">Observed</span>
+    <p>The Spike-based tree correctly grouped SARS-CoV-2 with SARS-CoV, and separately grouped the two Alphacoronaviruses (NL63, 229E) together — both consistent with established taxonomy.</p>
+  </div>
+  <div class="evidence-block">
+    <span class="evidence-tag hypothesis">Interpretation / Hypothesis</span>
+    <p>The placement of HCoV-OC43 with the Alphacoronavirus pair, rather than with the other Betacoronaviruses, is inconsistent with ICTV genus classification. This is most plausibly explained by the Spike protein's fast evolutionary rate and known susceptibility to recombination among coronaviruses, combined with the simplifying assumptions of an identity-based distance and Neighbor-Joining approach — rather than by a genuine close relationship between OC43 and the Alphacoronaviruses.</p>
+  </div>
+  <div class="evidence-block">
+    <span class="evidence-tag not-proven">Not directly established by this project</span>
+    <p>This project does not determine the true genome-wide evolutionary relationships between these viruses, nor does it use statistical support measures (e.g., bootstrap values) or a more conserved marker gene (e.g., RdRp), both of which are standard in rigorous coronavirus phylogenetics.</p>
+  </div>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Limitations</h2>
+  </div>
+
+  <ul class="limitations-list">
+    <li>The tree is based on a single protein (Spike) rather than whole-genome data or a more conserved gene such as RdRp, which is generally preferred for deep coronavirus phylogenetics.</li>
+    <li>The Neighbor-Joining method with an identity-based distance matrix is a simplifying approach; it does not correct for multiple substitutions at the same site and does not include bootstrap support values.</li>
+    <li>Spike is known to evolve quickly and to undergo recombination between coronavirus lineages, which can distort tree topology relative to the true evolutionary history — plausibly explaining the unexpected placement of HCoV-OC43.</li>
+    <li>Only six viruses were included; a broader sample of coronavirus sequences would give a more robust picture.</li>
+  </ul>
+
+  <div class="prose">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Conclusion</h2>
+    <p>
+      This project demonstrates a complete molecular phylogenetics workflow —
+      from sequence retrieval, through multiple sequence alignment, to
+      distance-based tree construction — applied to six clinically important
+      human coronaviruses. The analysis correctly recovered the close
+      relationship between SARS-CoV-2 and SARS-CoV, and between the two
+      Alphacoronaviruses, but also revealed a limitation of Spike-based,
+      distance-only phylogenetics: HCoV-OC43 did not group with its true
+      genus. This discrepancy is itself an informative result, illustrating
+      why more rigorous studies rely on conserved genes and statistically
+      supported tree-building methods for deep viral phylogenetics.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;margin:32px 0 12px;">Data Sources</h2>
+  </div>
+
+  <ul class="sources-list">
+    <li><a href="https://www.ncbi.nlm.nih.gov/protein" target="_blank" rel="noopener">NCBI Protein</a> — Spike protein accessions listed in the table above.</li>
+    <li><a href="https://www.ebi.ac.uk/jdispatcher/msa/clustalo" target="_blank" rel="noopener">Clustal Omega, EMBL-EBI</a> — multiple sequence alignment.</li>
+    <li>Genus classification per ICTV, as summarized in coronavirus review literature (e.g., PMC7605336; arXiv:2006.00639).</li>
+  </ul>
+
+  <div class="tool-tags">
+    <span><a href="https://www.ncbi.nlm.nih.gov" target="_blank" rel="noopener" style="color:inherit;">NCBI</a></span>
+    <span><a href="https://www.ebi.ac.uk/jdispatcher/msa/clustalo" target="_blank" rel="noopener" style="color:inherit;">Clustal Omega</a></span>
+    <span>R (seqinr)</span>
+    <span>R (ape)</span>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Djaber Kouicem</span>
+  <a href="mailto:kouicemdjaber0@gmail.com">kouicemdjaber0@gmail.com</a>
+</footer>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
